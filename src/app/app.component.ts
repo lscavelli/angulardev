@@ -85,5 +85,11 @@ export class AppComponent implements OnInit {
         //console.log(this.listDate);
     }
 
+    test(status) {
+        alert(status);
+    }
+
+
+
 
 }

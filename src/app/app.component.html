@@ -20,7 +20,7 @@
                     <i class="fa fa-ellipsis-v"></i>
                 </span>
                 <!-- checkbox -->
-                <input type="checkbox" value="" data-id="{{ t.id }}" [checked]="t.status_id==1?'checked':null">
+                <input type="checkbox" value="" data-id="{{ t.id }}" [checked]="t.status_id==1?'checked':null" (click)="test()">
                 <!-- todo text -->
                 <span class="text nametask" title="{{ t.name }}">{{ t.name }}</span>
                 <!-- Emphasis label -->
