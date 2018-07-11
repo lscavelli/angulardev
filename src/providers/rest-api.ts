@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, retry, map } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { Task } from "../app/model/task.model"
 @Injectable()
 export class RestApiProvider {
 
-  private baseUrl = 'http://app.test/api/tasks';
+  private baseUrl = 'http://app.test/admin/api/tasks';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestApiProvider Provider');
@@ -17,10 +17,10 @@ export class RestApiProvider {
     if (!al) al=dal;
     const params = new HttpParams().set('dal',dal).set('al',al);
     return this.http.get<Task[]>(this.baseUrl+'/bydate', { params: params} )
-    .pipe(
-      retry(3), // in caso di mancato accesso, riprova la richiesta per tre volte.
-      catchError(this.handleError)
-    );
+      .pipe(
+        retry(3), // in caso di mancato accesso, riprova la richiesta per tre volte.
+        catchError(this.handleError)
+      );
   }
 
   getByDateMode2(dal:string,al:string=null): Observable<Task[]> {
@@ -28,6 +28,25 @@ export class RestApiProvider {
       const params = new HttpParams().set('dal',dal).set('al',al);
       return this.http.get<Task[]>(this.baseUrl+'/bydate', { params: params} ).pipe(map((res: Response) => res['data']));
   }
+
+  update(task: Task): Observable<Task> {
+      const httpOptions = {
+          headers: new HttpHeaders({'Content-Type':  'application/json'})
+      };
+      return this.http.put<Task>(this.baseUrl, task, httpOptions)
+        .pipe(
+          catchError(this.handleError)
+        );
+  }
+
+  changeState(id:number,status:number): Observable<{}> {
+      const url = `${this.baseUrl}/changestate/${id}/${status}`;
+      return this.http.get<{}>(url)
+          .pipe(
+              catchError(this.handleError)
+          );
+  }
+
 
   private handleError(mgs: HttpErrorResponse) {
     // Si è verificato un errore sul client o sulla rete.

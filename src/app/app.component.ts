@@ -85,8 +85,23 @@ export class AppComponent implements OnInit {
         //console.log(this.listDate);
     }
 
-    test(status) {
-        alert(status);
+    onClick(event) {
+        // var target = event.target || event.srcElement || event.currentTarget;
+        // var idAttr = target.attributes.id; // type ...
+        // var value = idAttr.nodeValue;
+
+        var status = 1; var classN = 'done';
+        if(event.target.parentElement.className=='done') {
+            classN = ''; status = 0;
+        }
+        event.target.parentElement.className = classN;
+        this.rest.changeState(event.target.getAttribute('data-id'),status).subscribe();
+
+        // this.elRef.nativeElement.style.backgroundColor = 'red';
+        // this.elRef.nativeElement.children[2].style.backgroundColor = 'red';
+        // el.nativeElement.children
+        // el.nativeElement.parent
+        // el.nativeElement.host
     }
 
 

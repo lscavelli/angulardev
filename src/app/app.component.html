@@ -13,14 +13,14 @@
     <div class="box-body">
         <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
         <ul *ngIf="tasks" class="todo-list ui-sortable">
-            <li *ngFor="let t of tasks" data-id="{{ t.id }}" [class]="t.status_id==1?'done':null">
+            <li *ngFor="let t of tasks" data-id="{{ t.id }}" [class]="t.status_id==1?'done':''">
                 <!-- drag handle -->
                 <span class="handle ui-sortable-handle">
                     <i class="fa fa-ellipsis-v"></i>
                     <i class="fa fa-ellipsis-v"></i>
                 </span>
                 <!-- checkbox -->
-                <input type="checkbox" value="" data-id="{{ t.id }}" [checked]="t.status_id==1?'checked':null" (click)="test()">
+                <input type="checkbox" value="" [attr.data-id]="t.id" [checked]="t.status_id==1?'checked':null" (click)="onClick($event)" [id]="'check'+t.id">
                 <!-- todo text -->
                 <span class="text nametask" title="{{ t.name }}">{{ t.name }}</span>
                 <!-- Emphasis label -->
@@ -34,7 +34,7 @@
     </div>
     <!-- /.box-body -->
     <div class="box-footer clearfix no-border">
-        <button type="button" class="btn btn-default pull-right add-task"><i class="fa fa-plus"></i> Add task</button>
+        <button type="button" class="btn btn-default pull-right add-task" id="ttss"><i class="fa fa-plus"></i> Add task</button>
     </div>
 </div>
 <!-- /.box -->
