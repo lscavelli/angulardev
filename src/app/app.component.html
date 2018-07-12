@@ -1,7 +1,11 @@
 
 
 <div *ngIf="listDate; else loading"></div>
-<sl-calendar [selectedDates]="listDate" (onSelectDate)="checkEvent($event)"></sl-calendar>
+<sl-calendar [selectedDates]="listDate"
+             (onSelectDate)="checkEvent($event)"
+             (onChangeMonth)="getTasks2($event)"
+             (onChangeYear)="getTasks2($event)"
+></sl-calendar>
 
 <div class="box box-success" style="position: relative; left: 0px; top: 0px;">
     <!-- TO DO List -->
@@ -22,7 +26,7 @@
                 <!-- checkbox -->
                 <input type="checkbox" value="" [attr.data-id]="t.id" [checked]="t.status_id==1?'checked':null" (click)="onClick($event)" [id]="'check'+t.id">
                 <!-- todo text -->
-                <span class="text nametask" title="{{ t.name }}">{{ t.name }}</span>
+                <span class="text nametask" title="{{ t.name }}">{{ summary(t.name) }}</span>
                 <!-- Emphasis label -->
                 <small *ngFor="let c of t.categories" class="label" [ngStyle]="{'background-color': c.color}"><i class="fa fa-clock-o"></i> {{ c.name }}</small>
                 <div class="tools">

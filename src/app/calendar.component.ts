@@ -24,6 +24,8 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     @Input() selectedDates: CalendarDate[] = [];
     @Output() onSelectDate = new EventEmitter<CalendarDate>();
+    @Output() onChangeMonth = new EventEmitter<moment.Moment>();
+    @Output() onChangeYear = new EventEmitter<moment.Moment>();
 
     constructor() { console.log(this.selectedDates)}
 
@@ -52,6 +54,11 @@ export class CalendarComponent implements OnInit, OnChanges {
         }) > -1;
     }
 
+    isWeekEnd(date): boolean {
+        var day = date.getDay();
+        return day === 0 || day === 6;
+    }
+
     isSelectedMonth(date: moment.Moment): boolean {
         return moment(date).isSame(this.currentDate, 'month');
     }
@@ -68,11 +75,13 @@ export class CalendarComponent implements OnInit, OnChanges {
     // actions from calendar
     prevMonth(): void {
         this.currentDate = moment(this.currentDate).subtract(1, 'months');
+        this.onChangeMonth.emit(this.currentDate);
         this.generateCalendar();
     }
 
     nextMonth(): void {
         this.currentDate = moment(this.currentDate).add(1, 'months');
+        this.onChangeMonth.emit(this.currentDate);
         this.generateCalendar();
     }
 
@@ -88,11 +97,13 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     prevYear(): void {
         this.currentDate = moment(this.currentDate).subtract(1, 'year');
+        this.onChangeYear.emit(this.currentDate);
         this.generateCalendar();
     }
 
     nextYear(): void {
         this.currentDate = moment(this.currentDate).add(1, 'year');
+        this.onChangeYear.emit(this.currentDate);
         this.generateCalendar();
     }
 

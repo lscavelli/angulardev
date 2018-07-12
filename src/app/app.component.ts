@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     }
 
     getTasks() {
-        let cm = this.makeDateCurrentmonth();
+        let cm = this.makeFLOfMonth(moment());
         this.rest.getByDate(cm[0],cm[1])
             .subscribe(
                 (tasks: Task[]) => {
@@ -40,8 +40,8 @@ export class AppComponent implements OnInit {
             );
     }
 
-    getTasks2() {
-        let cm = this.makeDateCurrentmonth();
+    getTasks2(date: moment.Moment = moment()) {
+        let cm = this.makeFLOfMonth(date);
         this.rest.getByDateMode2(cm[0],cm[1])
             .subscribe(
                 (tasks: Task[]) => {
@@ -67,11 +67,15 @@ export class AppComponent implements OnInit {
             );
     }
 
-    makeDateCurrentmonth() {
-        let date = new Date(), y = date.getFullYear(), m = date.getMonth();
-        let firstDay = moment(new Date(y, m, 1)).format("YYYY-MM-DD").toString();
-        let lastDay = moment(new Date(y, m + 1, 0)).format("YYYY-MM-DD").toString();
-        return [firstDay,lastDay];
+    makeFLOfMonth(date: moment.Moment) {
+
+        const startOfMonth = date.startOf('month').format('YYYY-MM-DD').toString();
+        const endOfMonth   = date.endOf('month').format('YYYY-MM-DD').toString();
+
+        //let y = date.getFullYear(), m = date.getMonth();
+        //let firstDay = moment(new Date(y, m, 1)).format("YYYY-MM-DD").toString();
+        //let lastDay = moment(new Date(y, m + 1, 0)).format("YYYY-MM-DD").toString();
+        return [startOfMonth,endOfMonth];
     }
 
     extractDate(tasks: Task[]) : CalendarDate[] {
@@ -86,9 +90,6 @@ export class AppComponent implements OnInit {
     }
 
     onClick(event) {
-        // var target = event.target || event.srcElement || event.currentTarget;
-        // var idAttr = target.attributes.id; // type ...
-        // var value = idAttr.nodeValue;
 
         var status = 1; var classN = 'done';
         if(event.target.parentElement.className=='done') {
@@ -97,11 +98,24 @@ export class AppComponent implements OnInit {
         event.target.parentElement.className = classN;
         this.rest.changeState(event.target.getAttribute('data-id'),status).subscribe();
 
+        // var target = event.target || event.srcElement || event.currentTarget;
+        // var idAttr = target.attributes.id; // type ...
+        // var value = idAttr.nodeValue;
         // this.elRef.nativeElement.style.backgroundColor = 'red';
         // this.elRef.nativeElement.children[2].style.backgroundColor = 'red';
         // el.nativeElement.children
         // el.nativeElement.parent
         // el.nativeElement.host
+    }
+
+    summary(e, maxLengh: number = 40,) {
+        let newTxt = e;
+        if (e.length > maxLengh) {
+            newTxt = e.substring(0, maxLengh);
+            let nsb = newTxt.lastIndexOf(' ');
+            newTxt = newTxt.substring(0,nsb);
+        }
+        return newTxt;
     }
 
 
