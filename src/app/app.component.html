@@ -1,47 +1,54 @@
+<div class="row">
+    <section class="col-lg-7">
+        <category-component></category-component>
+    </section>
+    <section class="col-lg-5">
+        <div *ngIf="listDate; else loading"></div>
+        <sl-calendar [selectedDates]="listDate"
+                     (onSelectDate)="checkEvent($event)"
+                     (onChangeMonth)="getTasks2($event)"
+                     (onChangeYear)="getTasks2($event)"
+        ></sl-calendar>
 
-
-<div *ngIf="listDate; else loading"></div>
-<sl-calendar [selectedDates]="listDate"
-             (onSelectDate)="checkEvent($event)"
-             (onChangeMonth)="getTasks2($event)"
-             (onChangeYear)="getTasks2($event)"
-></sl-calendar>
-
-<div class="box box-success" style="position: relative; left: 0px; top: 0px;">
-    <!-- TO DO List -->
-    <div class="box-header">
-        <i class="ion ion-clipboard"></i>
-        <h3 class="box-title">To Do List</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-        <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-        <ul *ngIf="tasks" class="todo-list ui-sortable">
-            <li *ngFor="let t of tasks" data-id="{{ t.id }}" [class]="t.status_id==1?'done':''">
-                <!-- drag handle -->
-                <span class="handle ui-sortable-handle">
+        <div class="box box-success" style="position: relative; left: 0px; top: 0px;">
+            <!-- TO DO List -->
+            <div class="box-header">
+                <i class="ion ion-clipboard"></i>
+                <h3 class="box-title">To Do List</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+                <ul *ngIf="tasks" class="todo-list ui-sortable">
+                    <li *ngFor="let t of tasks" data-id="{{ t.id }}" [class]="t.status_id==1?'done':''">
+                        <!-- drag handle -->
+                        <span class="handle ui-sortable-handle">
                     <i class="fa fa-ellipsis-v"></i>
                     <i class="fa fa-ellipsis-v"></i>
                 </span>
-                <!-- checkbox -->
-                <input type="checkbox" value="" [attr.data-id]="t.id" [checked]="t.status_id==1?'checked':null" (click)="onClick($event)" [id]="'check'+t.id">
-                <!-- todo text -->
-                <span class="text nametask" title="{{ t.name }}">{{ summary(t.name) }}</span>
-                <!-- Emphasis label -->
-                <small *ngFor="let c of t.categories" class="label" [ngStyle]="{'background-color': c.color}"><i class="fa fa-clock-o"></i> {{ c.name }}</small>
-                <div class="tools">
-                    <a href="http://app.test/admin/tasks/{{ t.id }}/edit"><i class="fa fa-edit"></i></a>
-                    <a href="#" class="delete" data-id="{{ t.id }}"><i class="fa fa-trash-o"></i></a>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <!-- /.box-body -->
-    <div class="box-footer clearfix no-border">
-        <button type="button" class="btn btn-default pull-right add-task" id="ttss"><i class="fa fa-plus"></i> Add task</button>
-    </div>
-</div>
-<!-- /.box -->
+                        <!-- checkbox -->
+                        <input type="checkbox" value="" [attr.data-id]="t.id" [checked]="t.status_id==1?'checked':null" (click)="onClick($event)" [id]="'check'+t.id">
+                        <!-- todo text -->
+                        <span class="text nametask" title="{{ t.name }}">{{ summary(t.name) }}</span>
+                        <!-- Emphasis label -->
+                        <small *ngFor="let c of t.categories" class="label" [ngStyle]="{'background-color': c.color}"><i class="fa fa-clock-o"></i> {{ c.name }}</small>
+                        <div class="tools">
+                            <a href="http://app.test/admin/tasks/{{ t.id }}/edit"><i class="fa fa-edit"></i></a>
+                            <a href="#" class="delete" data-id="{{ t.id }}"><i class="fa fa-trash-o"></i></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+                <button type="button" class="btn btn-default pull-right add-task" id="ttss"><i class="fa fa-plus"></i> Add task</button>
+            </div>
+        </div>
+        <!-- /.box -->
 
-<ng-template #loading>Loading Calendar...</ng-template>
+        <ng-template #loading>Loading Calendar...</ng-template>
+    </section>
+</div>
+
+
 

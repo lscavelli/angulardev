@@ -13,23 +13,23 @@ export class RestApiProvider {
     console.log('Hello RestApiProvider Provider');
   }
 
-  getByDate(dal:string,al:string=null): Observable<Task[]> {
-    if (!al) al=dal;
-    const params = new HttpParams().set('dal',dal).set('al',al);
+    getByDate(dal:string,al:string=null): Observable<Task[]> {
+        if (!al) al=dal;
+        const params = new HttpParams().set('dal',dal).set('al',al);
     return this.http.get<Task[]>(this.baseUrl+'/bydate', { params: params} )
       .pipe(
         retry(3), // in caso di mancato accesso, riprova la richiesta per tre volte.
         catchError(this.handleError)
       );
-  }
+    }
 
-  getByDateMode2(dal:string,al:string=null): Observable<Task[]> {
+    getByDateMode2(dal:string,al:string=null): Observable<Task[]> {
       if (!al) al=dal;
       const params = new HttpParams().set('dal',dal).set('al',al);
       return this.http.get<Task[]>(this.baseUrl+'/bydate', { params: params} ).pipe(map((res: Response) => res['data']));
-  }
+    }
 
-  update(task: Task): Observable<Task> {
+    update(task: Task): Observable<Task> {
       const httpOptions = {
           headers: new HttpHeaders({'Content-Type':  'application/json'})
       };
@@ -37,15 +37,26 @@ export class RestApiProvider {
         .pipe(
           catchError(this.handleError)
         );
-  }
+    }
 
-  changeState(id:number,status:number): Observable<{}> {
+    changeState(id:number,status:number): Observable<{}> {
       const url = `${this.baseUrl}/changestate/${id}/${status}`;
       return this.http.get<{}>(url)
           .pipe(
               catchError(this.handleError)
           );
-  }
+    }
+
+    listVocabularies(): Observable<any[]> {
+        const url = `${this.baseUrl}/categories`;
+        return this.http.get<any[]>(url)
+            .pipe(
+                map((res: Response) => res['data']),
+                catchError(this.handleError)
+            );
+    }
+
+
 
 
   private handleError(mgs: HttpErrorResponse) {

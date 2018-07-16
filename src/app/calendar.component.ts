@@ -27,7 +27,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     @Output() onChangeMonth = new EventEmitter<moment.Moment>();
     @Output() onChangeYear = new EventEmitter<moment.Moment>();
 
-    constructor() { console.log(this.selectedDates)}
+    constructor() {}
 
     ngOnInit(): void {
         this.generateCalendar();
@@ -54,8 +54,8 @@ export class CalendarComponent implements OnInit, OnChanges {
         }) > -1;
     }
 
-    isWeekEnd(date): boolean {
-        var day = date.getDay();
+    isWeekEnd(date: moment.Moment): boolean {
+        var day = moment(date).date();
         return day === 0 || day === 6;
     }
 

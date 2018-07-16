@@ -4,11 +4,13 @@ import { CalendarComponent } from './calendar.component';
 import { RestApiProvider } from '../providers/rest-api';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { CategoryComponent } from './category.component';
 
 @NgModule({
   declarations: [
     CalendarComponent,
-    AppComponent
+    AppComponent,
+    CategoryComponent
   ],
   imports: [
       BrowserModule,
