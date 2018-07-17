@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import { CalendarDate } from './calendar.component';
 import * as moment from 'moment';
 import 'moment/locale/it';
@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
         //{'mDate': moment(new Date('2018-07-5'))},
     ];
     categories: any[] = [];
+    @Output() onUpdateTask = new EventEmitter<number>();
 
     constructor(private rest: RestApiProvider) {}
 
@@ -99,6 +100,7 @@ export class AppComponent implements OnInit {
         }
         event.target.parentElement.className = classN;
         this.rest.changeState(event.target.getAttribute('data-id'),status).subscribe();
+        this.onUpdateTask.emit(event.target.getAttribute('data-id'));
 
         // var target = event.target || event.srcElement || event.currentTarget;
         // var idAttr = target.attributes.id; // type ...
@@ -124,7 +126,9 @@ export class AppComponent implements OnInit {
         this.rest.listVocabularies().subscribe((data) => this.categories = data);
     }
 
-
+    test(event) {
+        console.log(event);
+    }
 
 
 }

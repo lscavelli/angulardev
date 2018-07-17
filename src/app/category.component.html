@@ -8,20 +8,21 @@
     <div class="box-body">
         <!-- /.box-body -->
         <div class="box-footer text-black" style="">
-            <div class="row" *ngFor="let voc of vocabolaries">
-                <div *ngFor="let c of voc.categories">
-
-                    <div class="clearfix">
-                        <span class="pull-left">{{ c.name + " #"+ c.id }}</span>
-                        <small class="pull-right"></small>
+            <ng-container *ngFor="let voc of vocabolaries">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ng-container *ngFor="let c of voc.categories; index as i; first as isFirst; last as isLast; count as num">
+                            <div class="clearfix">
+                                <span class="pull-left">{{ c.name + " #"+ c.id }}</span>
+                                <small class="pull-right">{{ barraVal(c) }}%</small>
+                            </div>
+                            <div class="progress xs">
+                                <div class="progress-bar" [ngStyle]="barraStyle(c)"></div>
+                            </div>
+                        </ng-container>
                     </div>
-                    <div class="progress xs">
-                        <div class="progress-bar"></div>
-                    </div>
-
                 </div>
-            </div>
-            <!-- /.row -->
+            </ng-container>
         </div>
     </div>
 </div>

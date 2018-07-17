@@ -19,7 +19,17 @@ export class CategoryComponent implements OnInit {
     }
 
     listVocabularies() {
-        this.rest.listVocabularies().subscribe((data) => this.vocabolaries = data);
+        this.rest.listVocabularies().subscribe((data) => this.vocabolaries = data ); // console.log(data)
+    }
+
+    barraVal(c) {
+        let barraVal = (100/c.tasks.length)*c.tasks_closed.length;
+        if (isNaN(barraVal)) barraVal = 0;
+        return barraVal;
+    }
+
+    barraStyle(c) {
+        return {'width':this.barraVal(c)+'%', 'background-color': c.color};
     }
 
 
