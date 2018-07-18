@@ -1,10 +1,9 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import { CalendarDate } from './calendar.component';
+import { CalendarDate } from './calendar/calendar.component';
 import * as moment from 'moment';
 import 'moment/locale/it';
 import { RestApiProvider } from '../providers/rest-api';
 import { Task } from "./model/task.model";
-
 
 @Component({
     selector: 'app-component',
@@ -27,7 +26,6 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.getTasks2();
-        this.listVocabularies();
     }
 
     getTasks() {
@@ -90,44 +88,6 @@ export class AppComponent implements OnInit {
         // listDate.push({'mDate': moment(new Date('2018-07-4'))});
         return listDate;
         //console.log(this.listDate);
-    }
-
-    onClick(event) {
-
-        var status = 1; var classN = 'done';
-        if(event.target.parentElement.className=='done') {
-            classN = ''; status = 0;
-        }
-        event.target.parentElement.className = classN;
-        this.rest.changeState(event.target.getAttribute('data-id'),status).subscribe();
-        this.onUpdateTask.emit(event.target.getAttribute('data-id'));
-
-        // var target = event.target || event.srcElement || event.currentTarget;
-        // var idAttr = target.attributes.id; // type ...
-        // var value = idAttr.nodeValue;
-        // this.elRef.nativeElement.style.backgroundColor = 'red';
-        // this.elRef.nativeElement.children[2].style.backgroundColor = 'red';
-        // el.nativeElement.children
-        // el.nativeElement.parent
-        // el.nativeElement.host
-    }
-
-    summary(e, maxLengh: number = 40,) {
-        let newTxt = e;
-        if (e.length > maxLengh) {
-            newTxt = e.substring(0, maxLengh);
-            let nsb = newTxt.lastIndexOf(' ');
-            newTxt = newTxt.substring(0,nsb);
-        }
-        return newTxt;
-    }
-
-    listVocabularies() {
-        this.rest.listVocabularies().subscribe((data) => this.categories = data);
-    }
-
-    test(event) {
-        console.log(event);
     }
 
 

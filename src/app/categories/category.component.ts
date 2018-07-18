@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { RestApiProvider } from '../providers/rest-api';
+import { RestApiProvider } from '../../providers/rest-api';
 
 
 @Component({

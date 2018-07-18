@@ -1,16 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CalendarComponent } from './calendar.component';
+import { CalendarComponent } from './calendar/calendar.component';
 import { RestApiProvider } from '../providers/rest-api';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { CategoryComponent } from './category.component';
+import { CategoryComponent } from './categories/category.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 @NgModule({
   declarations: [
     CalendarComponent,
-    AppComponent,
-    CategoryComponent
+    TasksComponent,
+    CategoryComponent,
+    AppComponent
   ],
   imports: [
       BrowserModule,
