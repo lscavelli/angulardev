@@ -7,13 +7,13 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <ul *ngIf="tasks" class="todo-list ui-sortable">
+        <ul *ngIf="tasks.length; else noval" class="todo-list">
             <li *ngFor="let t of tasks" data-id="{{ t.id }}" [class]="t.status_id==1?'done':''">
                 <!-- drag handle -->
-                <span class="handle ui-sortable-handle">
-            <i class="fa fa-ellipsis-v"></i>
-            <i class="fa fa-ellipsis-v"></i>
-        </span>
+                <span class="handle">
+                    <i class="fa fa-ellipsis-v" style="padding-left:2px"></i>
+                    <i class="fa fa-ellipsis-v"></i>
+                </span>
                 <!-- checkbox -->
                 <input type="checkbox" value="" [attr.data-id]="t.id" [checked]="t.status_id==1?'checked':null" (click)="changeState($event)" [id]="'check'+t.id">
                 <!-- todo text -->
@@ -26,6 +26,7 @@
                 </div>
             </li>
         </ul>
+        <ng-template #noval>Non sono presenti eventi</ng-template>
     </div>
     <!-- /.box-body -->
     <div class="box-footer clearfix no-border">
