@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { CalendarDate } from './calendar/calendar.component';
 import * as moment from 'moment';
 import 'moment/locale/it';
@@ -19,13 +19,13 @@ export class AppComponent implements OnInit {
         //{'mDate': moment(new Date('2018-07-4'))},
         //{'mDate': moment(new Date('2018-07-5'))},
     ];
-    categories: any[] = [];
-    @Output() onUpdateTask = new EventEmitter<number>();
+    vocabolaries: any[] = [];
 
     constructor(private rest: RestApiProvider) {}
 
     ngOnInit() {
         this.getTasks2();
+        this.listVocabularies();
     }
 
     getTasks() {
@@ -88,6 +88,10 @@ export class AppComponent implements OnInit {
         // listDate.push({'mDate': moment(new Date('2018-07-4'))});
         return listDate;
         //console.log(this.listDate);
+    }
+
+    listVocabularies() {
+        this.rest.listVocabularies().subscribe((data) => this.vocabolaries = data ); // console.log(data)
     }
 
 

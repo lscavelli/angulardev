@@ -1,6 +1,4 @@
-import {Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { RestApiProvider } from '../../providers/rest-api';
-
+import {Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'category-component',
@@ -8,19 +6,11 @@ import { RestApiProvider } from '../../providers/rest-api';
     encapsulation: ViewEncapsulation.None
 })
 
-export class CategoryComponent implements OnInit {
+export class CategoryComponent {
 
-    vocabolaries: any[] = [];
+    @Input() vocabolaries: any[] = [];
 
-    constructor(private rest: RestApiProvider) {}
-
-    ngOnInit() {
-        this.listVocabularies();
-    }
-
-    listVocabularies() {
-        this.rest.listVocabularies().subscribe((data) => this.vocabolaries = data ); // console.log(data)
-    }
+    constructor() {}
 
     barraVal(c) {
         let barraVal = (100/c.tasks.length)*c.tasks_closed.length;

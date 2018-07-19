@@ -15,7 +15,7 @@
             <i class="fa fa-ellipsis-v"></i>
         </span>
                 <!-- checkbox -->
-                <input type="checkbox" value="" [attr.data-id]="t.id" [checked]="t.status_id==1?'checked':null" (click)="onClick($event)" [id]="'check'+t.id">
+                <input type="checkbox" value="" [attr.data-id]="t.id" [checked]="t.status_id==1?'checked':null" (click)="changeState($event)" [id]="'check'+t.id">
                 <!-- todo text -->
                 <span class="text nametask" title="{{ t.name }}">{{ summary(t.name) }}</span>
                 <!-- Emphasis label -->

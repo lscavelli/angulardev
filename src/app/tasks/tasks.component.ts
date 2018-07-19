@@ -15,7 +15,7 @@ export class TasksComponent {
 
     constructor(private rest: RestApiProvider) {}
 
-    onClick(event) {
+    changeState(event) {
 
         var status = 1; var classN = 'done';
         if(event.target.parentElement.className=='done') {

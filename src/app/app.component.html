@@ -1,6 +1,6 @@
 <div class="row">
     <section class="col-lg-7">
-        <category-component></category-component>
+        <category-component [vocabolaries]="vocabolaries"></category-component>
     </section>
     <section class="col-lg-5">
         <div *ngIf="listDate; else loading"></div>
@@ -10,7 +10,7 @@
                      (onChangeYear)="getTasks2($event)"
         ></sl-calendar>
 
-        <tasks-component [tasks]="tasks"></tasks-component>
+        <tasks-component [tasks]="tasks" (onUpdateTask)="listVocabularies()"></tasks-component>
 
         <ng-template #loading>Loading Calendar...</ng-template>
     </section>
