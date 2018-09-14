@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "buildsl": "ng build --prod --watch --output-hashing=none",
+    "package": "cat ../newportaldev/public/webapp/{runtime,scripts,polyfills,main}.js | gzip > np-calendar.js.gz",
+    "serve": "http-server --gzip"
   },
   "private": true,
   "dependencies": {

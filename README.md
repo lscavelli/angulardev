@@ -1,5 +1,12 @@
-# Angulardev
+# Angulardev - for calendar todolist newportal
 
+Sono state aggiunte in scripts del file package.json le seguenti voci:
+- "buildsl": "ng build --prod --watch --output-hashing=none",
+- "package": "cat ../newportaldev/public/webapp/{runtime,scripts,polyfills,main}.js | gzip > np-calendar.js.gz",
+- "serve": "http-server --gzip"
+per eseguirle posizionarsi all'interno della cartella e lanciare i comandi:
+- npm run build && npm run package
+- npm run serve
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
 ## Development server
