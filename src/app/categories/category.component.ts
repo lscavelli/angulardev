@@ -13,7 +13,9 @@ export class CategoryComponent {
     constructor() {}
 
     barraVal(c) {
-        let barraVal = (100/c.tasks.length)*c.tasks_closed.length;
+        let numTasks = (c.tasks != undefined) ? c.tasks.length : 0;
+        let numTasksClosed = (c.tasksClosed != undefined) ? c.tasksClosed.length : 0;
+        let barraVal = Math.ceil((100/numTasks)*numTasksClosed);
         if (isNaN(barraVal)) barraVal = 0;
         return barraVal;
     }

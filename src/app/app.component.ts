@@ -81,6 +81,7 @@ export class AppComponent implements OnInit {
 
     extractDate(tasks: Task[]) : CalendarDate[] {
         let listDate: CalendarDate[] = [];
+        // console.log(tasks);
         for (let i = 0; i < tasks.length; i++) {
             listDate.push({'mDate':moment(tasks[i].date)})
         }

@@ -45,5 +45,9 @@ export class TasksComponent {
         return newTxt;
     }
 
+    createTask() {
+        window.location.href="/admin/tasks/create";
+    }
+
 
 }
