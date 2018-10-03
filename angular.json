@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../newportaldev/public/webapp",
+            "outputPath": "../newportal57/public/vendor/todolist/js",
             "deployUrl": "/webapp/",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -41,7 +41,7 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "all",
+              "outputHashing": "none",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,

@@ -7,7 +7,7 @@ import { Task } from "../app/model/task.model"
 @Injectable()
 export class RestApiProvider {
 
-  private baseUrl = 'http://app.test/admin/api/tasks';
+  private baseUrl = '/admin/api/tasks';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestApiProvider Provider');
