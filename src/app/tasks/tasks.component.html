@@ -21,8 +21,8 @@
                 <!-- Emphasis label -->
                 <small *ngFor="let c of t.categories" class="label" [ngStyle]="{'background-color': c.color}"><i class="fa fa-clock-o"></i> {{ c.name }}</small>
                 <div class="tools">
-                    <a href="http://app.test/admin/tasks/{{ t.id }}/edit"><i class="fa fa-edit"></i></a>
-                    <a href="#" class="delete" data-id="{{ t.id }}"><i class="fa fa-trash-o"></i></a>
+                    <a href="/admin/tasks/{{ t.id }}/edit"><i class="fa fa-edit"></i></a>
+                    <a href="#" class="delete" data-id="{{ t.id }}" (click)="deleteTask(t.id,t.name)"><i class="fa fa-trash-o"></i></a>
                 </div>
             </li>
         </ul>

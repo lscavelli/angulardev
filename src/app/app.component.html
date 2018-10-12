@@ -10,7 +10,9 @@
                      (onChangeYear)="getTasks2($event)"
         ></sl-calendar>
 
-        <tasks-component [tasks]="tasks" (onUpdateTask)="listVocabularies()"></tasks-component>
+        <tasks-component [tasks]="tasks" (onUpdateTask)="listVocabularies()"
+                                         (onDeleteTask)="ngOnInit()"
+        ></tasks-component>
 
         <ng-template #loading>Loading Calendar...</ng-template>
     </section>

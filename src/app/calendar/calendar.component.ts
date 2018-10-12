@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, OnChanges, Output, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -15,7 +15,7 @@ export interface CalendarDate {
     styleUrls: ['calendar.component.css']
 })
 
-export class CalendarComponent implements OnInit, OnChanges {
+export class CalendarComponent implements OnInit, OnChanges  {
 
     currentDate = moment();
     dayNames = ['D', 'L', 'M', 'M', 'G', 'V', 'S'];
@@ -34,13 +34,14 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
+        /*
         if (changes.selectedDates &&
             changes.selectedDates.currentValue &&
-            changes.selectedDates.currentValue.length  > 1) {
-            // sort on date changes for better performance when range checking
-            this.sortedDates = _.sortBy(changes.selectedDates.currentValue, (m: CalendarDate) => m.mDate.valueOf());
-            this.generateCalendar();
-        }
+            changes.selectedDates.currentValue.length  > 0) {
+        }*/
+        // sort on date changes for better performance when range checking
+        this.sortedDates = _.sortBy(changes.selectedDates.currentValue, (m: CalendarDate) => m.mDate.valueOf());
+        this.generateCalendar();
     }
 
     // date checkers

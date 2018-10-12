@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../newportal57/public/vendor/todolist/js",
+            "outputPath": "../newportal57/public/vendor/lfgscavelli/todolist/js",
             "deployUrl": "/webapp/",
             "index": "src/index.html",
             "main": "src/main.ts",

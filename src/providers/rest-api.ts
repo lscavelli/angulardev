@@ -56,10 +56,17 @@ export class RestApiProvider {
             );
     }
 
+    delete(id:number): Observable<{}> {
+        const url = `${this.baseUrl}/delete/${id}`;
+        return this.http.get<{}>(url)
+            .pipe(
+                map((res: Response) => res),
+                catchError(this.handleError)
+            );
+    }
 
 
-
-  private handleError(mgs: HttpErrorResponse) {
+    private handleError(mgs: HttpErrorResponse) {
     // Si è verificato un errore sul client o sulla rete.
     if (mgs.error instanceof ErrorEvent) {
       console.error('Si è verificato un errore:', mgs.error.message);
