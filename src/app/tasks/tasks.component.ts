@@ -51,10 +51,13 @@ export class TasksComponent {
     }
 
     deleteTask(id:number, name: string) {
-        //if(confirm("Sei sicuro di voler cancellare il task n. "+id+" - "+name)) {
-            this.rest.delete(id).subscribe();
-            this.onDeleteTask.emit(id);
-        //}
+        if(confirm("Sei sicuro di voler cancellare il task n. "+id+" - "+name)) {
+            this.rest.delete(id).subscribe(
+              () => {},
+              () => {},
+              () =>{this.onDeleteTask.emit(id)}
+            );
+        }
     }
 
 }
