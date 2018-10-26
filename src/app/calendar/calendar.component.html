@@ -1,0 +1,46 @@
+<div class="box box-solid bg-green-gradient" style="position: relative; left: 0px; top: 0px;">
+  <div class="box-header">
+    <i class="fa fa-calendar"></i>
+    <h3 class="box-title">Calendar</h3>
+  </div>
+  <div class="box-body no-padding">
+    <!-- Calendar -->
+    <div class="calendar">
+      <div class="calendar-navs">
+        <div class="year-nav">
+          <span>{{ currentDate.format('YYYY') }}</span>
+          <button (click)="prevYear()" type="button" class="btn btn-success btn-sm"><i class="fa fa-chevron-left"></i></button>
+          <button (click)="nextYear()" type="button" class="btn btn-success btn-sm"><i class="fa fa-chevron-right"></i></button>
+        </div>
+        <div class="month-nav">
+          <button (click)="prevMonth()" type="button" class="btn btn-success btn-sm"><i class="fa fa-chevron-left"></i></button>
+          <button (click)="nextMonth()" type="button" class="btn btn-success btn-sm"><i class="fa fa-chevron-right"></i></button>
+          <span class="p4">{{ currentDate.format('MMMM') }}</span>
+        </div>
+      </div>
+      <div class="month-grid">
+        <div class="day-names">
+          <div *ngFor="let name of dayNames" class="day-name p9">
+            {{ name }}
+          </div>
+        </div>
+        <div class="weeks">
+          <div *ngFor="let week of weeks" class="week">
+            <ng-container *ngFor="let day of week">
+              <div class="week-date disabled" *ngIf="!isSelectedMonth(day.mDate)">
+                <span class="date-text">{{ day.mDate.date() }}</span>
+              </div>
+              <div [id]="'dcell'+day.mDate.date()" class="week-date enabled"
+                   *ngIf="isSelectedMonth(day.mDate)"
+                   (click)="selectDate(day, 'dcell'+day.mDate.date())"
+                   [ngClass]="{ today: day.today, selected: day.selected }">
+                <span class="date-text">{{ day.mDate.date() }}</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Calendar -->
+  </div>
+</div>

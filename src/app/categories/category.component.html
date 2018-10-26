@@ -1,0 +1,32 @@
+<!-- TO DO List -->
+<div class="box box-success" style="position: relative; left: 0px; top: 0px;">
+    <div class="box-header">
+        <i class="ion ion-clipboard"></i>
+        <h3 class="box-title">List Categories tasks</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <!-- /.box-body -->
+        <div class="box-footer text-black" style="">
+            <ng-container *ngIf="vocabolaries.length; else noval">
+                <ng-container *ngFor="let voc of vocabolaries">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ng-container *ngFor="let c of voc.categories; index as i; first as isFirst; last as isLast; count as num">
+                                <div class="clearfix">
+                                    <span class="pull-left">{{ c.name + " #"+ c.id }}</span>
+                                    <small class="pull-right">{{ c.tasks.length + "/" + c.tasksClosed.length + " - " + barraVal(c) }}%</small>
+                                </div>
+                                <div class="progress xs">
+                                    <div class="progress-bar" [ngStyle]="barraStyle(c)"></div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <ng-template #noval> Non sono presenti categorie</ng-template>
+        </div>
+    </div>
+</div>
+<!-- /.box -->
