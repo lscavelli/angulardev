@@ -18,9 +18,9 @@ export class TasksComponent {
 
     changeState(event) {
 
-        var status = 1; var classN = 'done';
+        var status = 2; var classN = 'done';
         if(event.target.parentElement.className=='done') {
-            classN = ''; status = 0;
+            classN = ''; status = 1;
         }
         event.target.parentElement.className = classN;
         this.rest.changeState(event.target.getAttribute('data-id'),status).subscribe();
