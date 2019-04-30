@@ -8,6 +8,19 @@ per eseguirle posizionarsi all'interno della cartella e lanciare i comandi:
 - npm run build && npm run package
 - npm run serve
 
+````php
+@if(app()->isAlias('todo-list'))
+    <app-component></app-component>
+@endif
+
+@if(app()->isAlias('todo-list'))
+    <!-- js Calendar -->
+    <script type="text/javascript" src="{{ asset("/vendor/lfgscavelli/todolist/js/runtime.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("/vendor/lfgscavelli/todolist/js/polyfills.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("/vendor/lfgscavelli/todolist/js/main.js") }}"></script>
+@endif
+````
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
 ## Development server

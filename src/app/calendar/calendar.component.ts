@@ -18,9 +18,10 @@ export interface CalendarDate {
 export class CalendarComponent implements OnInit, OnChanges  {
 
     currentDate = moment();
-    dayNames = ['D', 'L', 'M', 'M', 'G', 'V', 'S'];
+    dayNames = ['D','L', 'M', 'M', 'G', 'V','S'];
     weeks: CalendarDate[][] = [];
     sortedDates: CalendarDate[] = [];
+    hideWeekEnd: boolean = true;
 
     @Input() selectedDates: CalendarDate[] = [];
     @Output() onSelectDate = new EventEmitter<CalendarDate>();
@@ -58,6 +59,12 @@ export class CalendarComponent implements OnInit, OnChanges  {
     isWeekEnd(date: moment.Moment): boolean {
         var day = moment(date).date();
         return day === 0 || day === 6;
+    }
+
+    checkWeekEnd(day: String): boolean {
+        if(this.hideWeekEnd)
+            return day === "S" || day === "D";
+        return false;
     }
 
     isSelectedMonth(date: moment.Moment): boolean {
@@ -113,7 +120,7 @@ export class CalendarComponent implements OnInit, OnChanges  {
         const dates = this.fillDates(this.currentDate);
         const weeks: CalendarDate[][] = [];
         while (dates.length > 0) {
-            weeks.push(dates.splice(0, 7));
+            weeks.push(dates.splice(0, 7)); // MOD 7
         }
         this.weeks = weeks;
     }
@@ -122,7 +129,7 @@ export class CalendarComponent implements OnInit, OnChanges  {
         const firstOfMonth = moment(currentMoment).startOf('month').day();
         const firstDayOfGrid = moment(currentMoment).startOf('month').subtract(firstOfMonth, 'days');
         const start = firstDayOfGrid.date();
-        return _.range(start, start + 42)
+        return _.range(start, start + 42) // MOD 42
             .map((date: number): CalendarDate => {
                 const d = moment(firstDayOfGrid).date(date);
                 return {
