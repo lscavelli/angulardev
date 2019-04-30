@@ -15,7 +15,7 @@
                             <ng-container *ngFor="let c of voc.categories; index as i; first as isFirst; last as isLast; count as num">
                                 <div class="clearfix">
                                     <span class="pull-left">{{ c.name + " #"+ c.id }}</span>
-                                    <small class="pull-right">{{ c.tasks.length + "/" + c.tasksClosed.length + " - " + barraVal(c) }}%</small>
+                                    <small class="pull-right">{{ c.tasksClosed.length + "/" + c.tasks.length + " - " + barraVal(c) }}%</small>
                                 </div>
                                 <div class="progress xs">
                                     <div class="progress-bar" [ngStyle]="barraStyle(c)"></div>
