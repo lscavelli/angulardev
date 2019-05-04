@@ -18,7 +18,7 @@ export interface CalendarDate {
 export class CalendarComponent implements OnInit, OnChanges  {
 
     currentDate = moment();
-    dayNames = ['D','L', 'M', 'M', 'G', 'V','S'];
+    dayNames = ['Domenica','Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì','Sabato'];
     weeks: CalendarDate[][] = [];
     sortedDates: CalendarDate[] = [];
     hideWeekEnd: boolean = true;
@@ -56,14 +56,20 @@ export class CalendarComponent implements OnInit, OnChanges  {
         }) > -1;
     }
 
-    isWeekEnd(date: moment.Moment): boolean {
-        var day = moment(date).date();
-        return day === 0 || day === 6;
+    isWeekEnd(date: moment.Moment): boolean
+    {
+        //var day = moment(date).day();
+      if(this.hideWeekEnd) {
+        var day = moment(date).weekday();
+        return day === 5 || day === 6;
+      }
+      return false;
     }
 
-    checkWeekEnd(day: String): boolean {
+    checkWeekEnd(day: String): boolean
+    {
         if(this.hideWeekEnd)
-            return day === "S" || day === "D";
+            return day === "Sabato" || day === "Domenica";
         return false;
     }
 
